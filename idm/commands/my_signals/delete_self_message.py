@@ -30,7 +30,7 @@ def delete_self_message(event: MySignalEvent) -> str:
         if e.error_code == 924:
             message_id = utils.new_message(event.api, event.chat.peer_id, message="❗ Не удалось удалить сообщения.")
         else:
-            message_id = utils.new_message(event.api, event.chat.peer_id, message=f"❗ Не удалось удалить сообщения. Ошибка VK {e.error_msg}")
+            message_id = utils.new_message(event.api, event.chat.peer_id, message=f"❗ Не удалось удалить сообщения. {e.error_msg}")
     except:
         message_id = utils.new_message(event.api, event.chat.peer_id, message=f"❗ Произошла неизвестная ошибка.")
 

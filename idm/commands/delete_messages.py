@@ -4,7 +4,7 @@ from vkapi import VkApiResponseException
 
 @dp.event_handle(dp.Methods.DELETE_MESSAGES)
 def delete_messages(event: Event) -> str:
-    message_id = utils.new_message(event.api, event.chat.peer_id, message="... удаляю сообщения ...")
+    message_id = utils.new_message(event.api, event.chat.peer_id, message="удаляю сообщения ...")
 
     msg_ids = utils.get_msg_ids(event.api, event.chat.peer_id, event.obj['local_ids'])   
 

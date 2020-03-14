@@ -4,18 +4,7 @@ from vkapi import VkApiResponseException
 
 @dp.event_handle(dp.Methods.SUBSCRIBE_SIGNALS)
 def subscribe_signals(event: Event) -> str:
-    message = f"""✅ Все отлично. 
-        IDM настроен и готов к работе.
-
-        Iris chat ID: {event.chat.iris_id}
-        VK peer ID: {event.chat.peer_id}
-        Панель управления IDM: https://{event.db.host}/
-
-        Приятного общения :3
-        
-        PS
-        ВК: https://vk.com/llordrall
-        GitHub: https://github.com/LordRalInc/IDM
+    message = f"""✅ Беседа распознана
         """.replace("    ", "")
 
     event.db.chats[event.chat.iris_id]['installed'] = True

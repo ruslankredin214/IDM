@@ -10,13 +10,13 @@ def add_trusted_user(event: MySignalEvent) -> str:
     tr_id = event.reply_message['from_id']
     if tr_id in event.db.trusted_users:
         edit_message(event.api, event.chat.peer_id, event.msg['id'], 
-            message=f"⚠ Пользователь уже в доверенных.")
+            message=f"⚠ Пользователь уже в доверенных")
         return "ok"
     tr_user = event.api('users.get', user_ids=tr_id)[0]
     event.db.trusted_users.append(tr_id)
     event.db.save()
     edit_message(event.api, event.chat.peer_id, event.msg['id'], 
-        message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] в доверенных.")
+        message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] добавлен в список доверенных пользователей.")
     return "ok"
 
 

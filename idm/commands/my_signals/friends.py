@@ -12,7 +12,7 @@ def add_to_fr(event: MySignalEvent) -> str:
     try:
         event.api('friends.add', user_id=friend_id)
         edit_message(event.api, event.chat.peer_id, event.msg['id'],
-            message="✅ Все отлично, запрос отправлен")
+            message="✅ Порядок. Заявка в друзья отправлена")
         return "ok"
     except VkApiResponseException as e:
         if e.error_code == 174:
@@ -20,13 +20,13 @@ def add_to_fr(event: MySignalEvent) -> str:
             message="❗ Невозможно добавить в друзья самого себя")
         elif e.error_code == 175:
             edit_message(event.api, event.chat.peer_id, event.msg['id'],
-                message="❗ Невозможно добавить в друзья пользователя, который занес Вас в свой черный список")
+                message="❗ Что-то пошло не так")
         elif e.error_code == 176:
             edit_message(event.api, event.chat.peer_id, event.msg['id'],
-                message="❗ Невозможно добавить в друзья пользователя, который занесен в Ваш черный список")
+                message="❗ Что-то пошло не так")
         else:
             edit_message(event.api, event.chat.peer_id, event.msg['id'],
-                message=f"❗ Невозможно добавить в друзья пользователя: {e.error_msg}")
+                message=f"❗Что-то пошло не так: {e.error_msg}")
         return "ok"
 
 @dp.my_signal_event_handle('-др', '-друг')

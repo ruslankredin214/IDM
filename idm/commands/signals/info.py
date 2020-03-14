@@ -22,7 +22,7 @@ def sinfo(event: SignalEvent) -> str:
 
 
     message = f"""Информация о дежурном:
-    IDM v{__version__}
+    v{__version__}
     Владелец: [id{owner['id']}|{owner['first_name']} {owner['last_name']}]
     Чатов: {len(event.db.chats.keys())}
 

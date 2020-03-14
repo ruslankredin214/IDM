@@ -12,7 +12,7 @@ def delete_msg(api: VkApi, msg_id: int):
 @dp.my_signal_event_handle('-смс', 'dsm')
 def delete_self_message(event: MySignalEvent) -> str:
     message_id = event.msg['id']
-    utils.edit_message(event.api, event.chat.peer_id, message_id, message="... удаляю сообщения ...")
+    utils.edit_message(event.api, event.chat.peer_id, message_id, message="...удаляю сообщения...")
 
     user_id = event.msg['from_id']
 

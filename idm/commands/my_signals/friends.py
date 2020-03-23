@@ -12,7 +12,7 @@ def add_to_fr(event: MySignalEvent) -> str:
     try:
         event.api('friends.add', user_id=friend_id)
         edit_message(event.api, event.chat.peer_id, event.msg['id'],
-            message="✅ Все отлично, запрос отправлен")
+            message="✅ Порядок. Заявка в друзья отправлена")
         return "ok"
     except VkApiResponseException as e:
         if e.error_code == 174:

@@ -4,18 +4,18 @@ from ...utils import new_message, edit_message
 @dp.my_signal_event_handle('+дов')
 def add_trusted_user(event: MySignalEvent) -> str:
     if event.reply_message == None:
-        edit_message(event.api, event.chat.peer_id, event.msg['id'], message="❗ Ошибка при выполнении, необходимо пересланное сообщение")
+        new_message(event.api, event.chat.peer_id, event.msg['id'], message="❗ Ошибка при выполнении, необходимо пересланное сообщение")
         return "ok"
 
     tr_id = event.reply_message['from_id']
     if tr_id in event.db.trusted_users:
-        edit_message(event.api, event.chat.peer_id, event.msg['id'], 
+        new_message(event.api, event.chat.peer_id, event.msg['id'], 
             message=f"⚠ Пользователь уже в доверенных")
         return "ok"
     tr_user = event.api('users.get', user_ids=tr_id)[0]
     event.db.trusted_users.append(tr_id)
     event.db.save()
-    edit_message(event.api, event.chat.peer_id, event.msg['id'], 
+    new_message(event.api, event.chat.peer_id, event.msg['id'], 
         message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] добавлен в список доверенных пользователей.")
     return "ok"
 
@@ -35,7 +35,7 @@ def remove_trusted_user(event: MySignalEvent) -> str:
     tr_user = event.api('users.get', user_ids=tr_id)[0]
     event.db.trusted_users.remove(tr_id)
     event.db.save()
-    edit_message(event.api, event.chat.peer_id, event.msg['id'], 
+    new_message(event.api, event.chat.peer_id, event.msg['id'], 
         message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] удален из доверенных.")
     return "ok"
 
@@ -49,6 +49,6 @@ def trusted_users(event: MySignalEvent) -> str:
         itr += 1
         message += f"\n{itr}. [id{user['id']}|{user['first_name']} {user['last_name']}]"
     
-    edit_message(event.api, event.chat.peer_id, event.msg['id'], message=message)
+    new_message(event.api, event.chat.peer_id, event.msg['id'], message=message)
 
     return "ok"

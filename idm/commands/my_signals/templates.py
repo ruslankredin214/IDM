@@ -40,10 +40,10 @@ def remove_template(event: MySignalEvent) -> str:
         if temp['name'] == name:
             event.db.templates.remove(temp)
             event.db.save()
-            edit_message(event.api, event.chat.peer_id, event.msg['id'], message=f"✅ Шаблон \"{name}\" удален")
+            edit_message(event.api, event.chat.peer_id, event.msg['id'], message=f"✅ Шаблон \{name}\ удален")
             return "ok"
     
-    edit_message(event.api, event.chat.peer_id, event.msg['id'], message=f"❗ Шаблон \"{name}\" не найден.")
+    edit_message(event.api, event.chat.peer_id, event.msg['id'], message=f"❗ Шаблон \{name}\ не найден.")
     return "ok"
 
 
@@ -72,5 +72,5 @@ def run_template(event: MySignalEvent) -> str:
             edit_message(event.api, event.chat.peer_id, event.msg['id'], message=temp['payload'], attachment=",".join(temp['attachments']))
             return "ok"
     
-    edit_message(event.api, event.chat.peer_id, event.msg['id'], message=f"📝 Нет у меня шаблона \"{name}\" с таким именем")
+    edit_message(event.api, event.chat.peer_id, event.msg['id'], message=f"📝 Нет у меня шаблона с таким именем")
     return "ok"

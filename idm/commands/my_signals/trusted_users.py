@@ -16,7 +16,7 @@ def add_trusted_user(event: MySignalEvent) -> str:
     event.db.trusted_users.append(tr_id)
     event.db.save()
     new_message(event.api, event.chat.peer_id, event.msg['id'], 
-        message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] добавлен в список доверенных пользователей.")
+        message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] добавлен в список доверенных ")
     return "ok"
 
 
@@ -36,7 +36,7 @@ def remove_trusted_user(event: MySignalEvent) -> str:
     event.db.trusted_users.remove(tr_id)
     event.db.save()
     new_message(event.api, event.chat.peer_id, event.msg['id'], 
-        message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] удален из доверенных.")
+        message=f"✅ Пользователь [id{tr_user['id']}|{tr_user['first_name']} {tr_user['last_name']}] удален из доверенных")
     return "ok"
 
 @dp.my_signal_event_handle('доверенные', "довы")
